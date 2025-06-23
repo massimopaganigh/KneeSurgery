@@ -3,7 +3,7 @@
     public class StatusesService(Statuses statuses) : IStatusesService
     {
         private bool _isMonitoring = false;
-        private readonly System.Timers.Timer _robloxMonitorTimer = new(5000);
+        private readonly System.Timers.Timer _robloxMonitorTimer = new(Constants.RobloxMonitorTimerPollingInterval);
         private readonly Statuses _statuses = statuses;
 
         private void OnMonitorTimerElapsed(object? sender, ElapsedEventArgs e)

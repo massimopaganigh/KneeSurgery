@@ -3,7 +3,7 @@
     public class DebugLogService(DebugLog debugLog, Directories directories) : IDebugLogService
     {
         private readonly DebugLog _debugLog = debugLog;
-        private readonly System.Timers.Timer _debugLogMonitorTimer = new(5000);
+        private readonly System.Timers.Timer _debugLogMonitorTimer = new(Constants.DebugLogMonitorTimerPollingInterval);
         private readonly Directories _directories = directories;
         private bool _isMonitoring = false;
 

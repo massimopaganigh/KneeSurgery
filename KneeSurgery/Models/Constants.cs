@@ -2,7 +2,10 @@
 {
     public class Constants
     {
+        public const int DebugLogMonitorTimerPollingInterval = 5000;
+        public const string KneeSurgeryLog = "KneeSurgery.log";
         public const string KneeSurgeryVersion = "2025.1";
+        public const int RobloxMonitorTimerPollingInterval = 5000;
         public const string RobloxPlayerBeta = "RobloxPlayerBeta";
         public const string SirHDebugLogDat = "sirh_debug_log.dat";
         public const string SirHui = "sirhui";
