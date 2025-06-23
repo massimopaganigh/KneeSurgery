@@ -2,6 +2,7 @@
 
 setlocal enabledelayedexpansion
 
+set /p version=<..\VERSION
 set "output_dir=..\out"
 set "knee_surgery_publish_dir=%output_dir%\KneeSurgery"
 
@@ -51,7 +52,7 @@ if %ERRORLEVEL% neq 0 (
 
 echo Building KneeSurgery...
 
-dotnet publish ..\src\KneeSurgery\KneeSurgery.csproj -p:PublishProfile=FolderProfile
+dotnet publish ..\src\KneeSurgery\KneeSurgery.csproj -p:PublishProfile=FolderProfile -p:Version=%version%
 
 if %ERRORLEVEL% neq 0 (
     echo Build of KneeSurgery failed.
