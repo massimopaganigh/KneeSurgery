@@ -1,6 +1,6 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class SirHurtService(Directories directories)
+    public class SirHurtService(Directories directories) : ISirHurtService
     {
         private readonly Directories _directories = directories;
 
