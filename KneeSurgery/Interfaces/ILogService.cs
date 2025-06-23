@@ -16,12 +16,12 @@ namespace KneeSurgery.Interfaces
         /// Starts the logging operation asynchronously.
         /// </summary>
         /// <returns>A task representing the asynchronous logging start operation.</returns>
-        public Task StartLogging();
+        public Task StartLoggingAsync();
 
         /// <summary>
         /// Stops the logging operation asynchronously.
         /// </summary>
         /// <returns>A task representing the asynchronous logging stop operation.</returns>
-        public Task StopLogging();
+        public Task StopLoggingAsync();
     }
 }

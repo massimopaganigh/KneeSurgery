@@ -4,7 +4,7 @@
     {
         private readonly Directories _directories = directories;
 
-        public async Task StartLogging()
+        public async Task StartLoggingAsync()
         {
             try
             {
@@ -15,15 +15,15 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[{nameof(StartLogging)}] Exception message: {ex.Message}.");
+                Console.WriteLine($"[{nameof(StartLoggingAsync)}] Exception: {ex}.");
             }
             finally
             {
-                await StopLogging();
+                await StopLoggingAsync();
             }
         }
 
-        public async Task StopLogging()
+        public async Task StopLoggingAsync()
         {
             try
             {
@@ -31,7 +31,7 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[{nameof(StopLogging)}] Exception message: {ex.Message}.");
+                Console.WriteLine($"[{nameof(StopLoggingAsync)}] Exception: {ex}.");
             }
         }
     }

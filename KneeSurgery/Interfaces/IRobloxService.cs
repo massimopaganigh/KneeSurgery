@@ -16,7 +16,7 @@ namespace KneeSurgery.Interfaces
         /// Gets the current version of the Roblox application asynchronously.
         /// </summary>
         /// <returns>A string containing the Roblox version.</returns>
-        public Task<string> GetVersion();
+        public Task<string> GetVersionAsync();
 
         /// <summary>
         /// Forcefully terminates the Roblox application execution.

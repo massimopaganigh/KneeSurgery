@@ -21,6 +21,6 @@ namespace KneeSurgery.Interfaces
         /// - bool: true if execution succeeded, false otherwise
         /// - string: result message or error message
         /// </returns>
-        public Task<(bool, string)> Execute(string script);
+        public Task<(bool, string)> ExecuteAsync(string script);
     }
 }

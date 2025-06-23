@@ -5,7 +5,7 @@
         private readonly Directories _directories = directories;
         private readonly HttpClient _httpClient = httpClient;
 
-        public async Task<string> GetVersion()
+        public async Task<string> GetVersionAsync()
         {
             try
             {
@@ -16,18 +16,18 @@
                     if (sirHurt.TryGetProperty("exploit_version", out JsonElement version))
                         return version.GetString() ?? string.Empty;
 
-                    Log.Error("[{0}] exploit_version field not found in JSON response.", nameof(GetVersion));
+                    Log.Error("[{0}] exploit_version field not found in JSON response.", nameof(GetVersionAsync));
 
                     return string.Empty;
                 }
 
-                Log.Error("[{0}] SirHurt V5 field not found in JSON response.", nameof(GetVersion));
+                Log.Error("[{0}] SirHurt V5 field not found in JSON response.", nameof(GetVersionAsync));
 
                 return string.Empty;
             }
             catch (Exception ex)
             {
-                Log.Error(ex, nameof(GetVersion));
+                Log.Error(ex, nameof(GetVersionAsync));
 
                 return string.Empty;
             }

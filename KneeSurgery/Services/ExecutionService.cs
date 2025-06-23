@@ -6,13 +6,13 @@
         private readonly IKSFunctionsService _ksFunctionsService = kSFunctionsService;
         private readonly Statuses _statuses = statuses;
 
-        public async Task<(bool, string)> Execute(string script)
+        public async Task<(bool, string)> ExecuteAsync(string script)
         {
             try
             {
                 if (_statuses.InjectionStatus != InjectionStatus.Injected)
                 {
-                    string result = $"[{nameof(Execute)}] Current status: {_statuses.InjectionStatus}. No execution needed.";
+                    string result = $"[{nameof(ExecuteAsync)}] Current status: {_statuses.InjectionStatus}. No execution needed.";
 
                     Log.Debug(result);
 
@@ -26,21 +26,21 @@
                 {
                     Directory.CreateDirectory(sirHuiDirectory);
 
-                    Log.Debug("[{0}] Created directory: {1}.", nameof(Execute), sirHuiDirectory);
+                    Log.Debug("[{0}] Created directory: {1}.", nameof(ExecuteAsync), sirHuiDirectory);
                 }
 
                 script = _ksFunctionsService.ProcessKSFunctions(script);
 
                 await File.WriteAllTextAsync(sirHurtDat, script);
 
-                Log.Debug("[{0}] Script written to: {1}.", nameof(Execute), sirHurtDat);
-                Log.Debug("[{0}] Script: {1}.", nameof(Execute), script);
+                Log.Debug("[{0}] Script written to: {1}.", nameof(ExecuteAsync), sirHurtDat);
+                Log.Debug("[{0}] Script: {1}.", nameof(ExecuteAsync), script);
 
                 return (_statuses.InjectionStatus == InjectionStatus.Injected, script);
             }
             catch (Exception ex)
             {
-                Log.Error(ex, nameof(Execute));
+                Log.Error(ex, nameof(ExecuteAsync));
 
                 return (false, ex.Message);
             }

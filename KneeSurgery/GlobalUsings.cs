@@ -5,5 +5,7 @@ global using Serilog;
 global using Serilog.Configuration;
 //global using Serilog.Core;
 global using System.Diagnostics;
+global using System.IO.Compression;
+global using System.Reflection;
 global using System.Text.Json;
 global using System.Timers;

@@ -16,7 +16,7 @@ namespace KneeSurgery.Interfaces
         /// Gets the current version of the SirHurt application asynchronously.
         /// </summary>
         /// <returns>A string containing the SirHurt version.</returns>
-        public Task<string> GetVersion();
+        public Task<string> GetVersionAsync();
 
         /// <summary>
         /// Logs out the user from SirHurt by removing authentication files.
