@@ -1,4 +1,10 @@
-﻿namespace KneeSurgery.Interfaces
+﻿//-----------------------------------------------------------------------
+// <copyright file="ILogService.cs" company="SirHurt">
+//     Author: massimopaganigh
+//     Copyright (c) 2025. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace KneeSurgery.Interfaces
 {
     /// <summary>
     /// Service for managing logging functionality.

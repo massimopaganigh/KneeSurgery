@@ -1,4 +1,10 @@
-﻿namespace KneeSurgery.Services
+﻿//-----------------------------------------------------------------------
+// <copyright file="LastLogEvenSinkService.cs" company="SirHurt">
+//     Author: massimopaganigh
+//     Copyright (c) 2025. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace KneeSurgery.Services
 {
     /// <summary>
     /// Service providing extension methods for configuring custom log event sinks.
