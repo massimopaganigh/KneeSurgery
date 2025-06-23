@@ -4,6 +4,7 @@ setlocal enabledelayedexpansion
 
 set /p version=<..\VERSION
 set "output_dir=..\out"
+set "release_dir=%output_dir%\release"
 set "knee_surgery_publish_dir=%output_dir%\KneeSurgery"
 
 echo Cleaning directories...
@@ -60,5 +61,18 @@ if %ERRORLEVEL% neq 0 (
 )
 
 del /f /q "%knee_surgery_publish_dir%\*.pdb"
+
+echo Archiving KneeSurgery...
+
+powershell Compress-Archive -Path "%knee_surgery_publish_dir%\*" -DestinationPath "%knee_surgery_publish_dir%_%version%.zip" -Force
+
+if %ERRORLEVEL% neq 0 (
+    echo Archiving of KneeSurgery failed.
+    exit /b %ERRORLEVEL%
+)
+
+mkdir "%release_dir%"
+
+move /y "%knee_surgery_publish_dir%_%version%.zip" "%release_dir%\KneeSurgery_%version%.zip"
 
 endlocal
