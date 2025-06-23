@@ -7,6 +7,12 @@
     public interface ISirHurtService
     {
         /// <summary>
+        /// Gets the current version of the SirHurt application asynchronously.
+        /// </summary>
+        /// <returns>A string containing the SirHurt version.</returns>
+        public Task<string> GetVersion();
+
+        /// <summary>
         /// Logs out the user from SirHurt by removing authentication files.
         /// Deletes the authentication data files (a.dat and p.dat) from the SirHurt directory.
         /// </summary>

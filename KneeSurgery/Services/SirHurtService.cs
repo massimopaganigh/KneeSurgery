@@ -1,8 +1,39 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class SirHurtService(Directories directories) : ISirHurtService
+    public class SirHurtService(Directories directories, HttpClient httpClient) : ISirHurtService
     {
         private readonly Directories _directories = directories;
+        private readonly HttpClient _httpClient = httpClient;
+
+        public async Task<string> GetVersion()
+        {
+            try
+            {
+                using JsonDocument document = JsonDocument.Parse(await _httpClient.GetStringAsync(Constants.SirHurtApi));
+
+                if (document.RootElement.EnumerateArray().FirstOrDefault().TryGetProperty("SirHurt V5", out JsonElement sirHurt))
+                {
+                    if (sirHurt.TryGetProperty("exploit_version", out JsonElement version))
+                        return version.GetString() ?? string.Empty;
+
+                    Log.Error("[{0}] exploit_version field not found in JSON response.", nameof(GetVersion));
+
+                    return string.Empty;
+                }
+
+                Log.Error("[{0}] SirHurt V5 field not found in JSON response.", nameof(GetVersion));
+
+                return string.Empty;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, nameof(GetVersion));
+
+                return string.Empty;
+            }
+        }
+
+        public (bool, string) Login() => throw new NotImplementedException(nameof(Login));
 
         public (bool, string) Logout()
         {
