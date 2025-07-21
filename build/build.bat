@@ -5,7 +5,6 @@ setlocal enabledelayedexpansion
 set /p version=<..\VERSION
 set "output_dir=..\out"
 set "release_dir=%output_dir%\release"
-set "knee_surgery_publish_dir=%output_dir%\KneeSurgery"
 
 echo Cleaning directories...
 
@@ -51,28 +50,40 @@ if %ERRORLEVEL% neq 0 (
 @REM     exit /b %ERRORLEVEL%
 @REM )
 
-echo Building KneeSurgery...
+set "frameworks=net6.0 net8.0 net9.0"
 
-dotnet publish ..\src\KneeSurgery\KneeSurgery.csproj -p:PublishProfile=FolderProfile -p:Version=%version%
+for %%f in (%frameworks%) do (
+    set "knee_surgery_publish_dir=%output_dir%\KneeSurgery_%%f"
+    
+    echo Building KneeSurgery_%%f...
+    
+    for %%i in ("%output_dir%") do set "abs_output_dir=%%~fi"
 
-if %ERRORLEVEL% neq 0 (
-    echo Build of KneeSurgery failed.
-    exit /b %ERRORLEVEL%
+    set "abs_publish_dir=!abs_output_dir!\KneeSurgery_%%f"
+    
+    dotnet publish ..\src\KneeSurgery\KneeSurgery.csproj -f %%f -p:PublishDir="!abs_publish_dir!" -p:Version=%version% -c Release
+    
+    if !ERRORLEVEL! neq 0 (
+        echo Build of KneeSurgery_%%f failed.
+        exit /b !ERRORLEVEL!
+    )
+    
+    echo Cleaning PDB files for %%f...
+
+    del /f /q "!knee_surgery_publish_dir!\*.pdb" 2>nul
+    
+    echo Archiving KneeSurgery_%%f...
+    
+    powershell Compress-Archive -Path "!knee_surgery_publish_dir!\*" -DestinationPath "!knee_surgery_publish_dir!_%version%.zip" -Force
+    
+    if !ERRORLEVEL! neq 0 (
+        echo Archiving of KneeSurgery_%%f failed.
+        exit /b !ERRORLEVEL!
+    )
+    
+    if not exist "%release_dir%" mkdir "%release_dir%"
+    
+    move /y "!knee_surgery_publish_dir!_%version%.zip" "%release_dir%\KneeSurgery_%%f_%version%.zip"
 )
-
-del /f /q "%knee_surgery_publish_dir%\*.pdb"
-
-echo Archiving KneeSurgery...
-
-powershell Compress-Archive -Path "%knee_surgery_publish_dir%\*" -DestinationPath "%knee_surgery_publish_dir%_%version%.zip" -Force
-
-if %ERRORLEVEL% neq 0 (
-    echo Archiving of KneeSurgery failed.
-    exit /b %ERRORLEVEL%
-)
-
-mkdir "%release_dir%"
-
-move /y "%knee_surgery_publish_dir%_%version%.zip" "%release_dir%\KneeSurgery_%version%.zip"
 
 endlocal
