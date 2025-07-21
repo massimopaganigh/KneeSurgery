@@ -25,18 +25,18 @@ for /r "..\src\KneeSurgery" %%p in (.cr .vs bin obj) do (
     )
 )
 
-echo Restoring KneeSurgery.sln...
+echo Restoring KneeSurgery.slnx...
 
-dotnet restore ..\src\KneeSurgery.sln
+dotnet restore ..\src\KneeSurgery.slnx
 
 if %ERRORLEVEL% neq 0 (
-    echo Restore of KneeSurgery.sln failed.
+    echo Restore of KneeSurgery.slnx failed.
     exit /b %ERRORLEVEL%
 )
 
 echo Checking for outdated packages...
 
-powershell -command "$output = dotnet list ..\src\KneeSurgery.sln package --outdated --format json 2>$null | ConvertFrom-Json -ErrorAction SilentlyContinue; if ($output.projects.frameworks.topLevelPackages.Count -gt 0) { Write-Host 'Outdated packages found.' -ForegroundColor Red; exit 1 } else { Write-Host 'No outdated packages found.' -ForegroundColor Green }"
+powershell -command "$output = dotnet list ..\src\KneeSurgery.slnx package --outdated --format json 2>$null | ConvertFrom-Json -ErrorAction SilentlyContinue; if ($output.projects.frameworks.topLevelPackages.Count -gt 0) { Write-Host 'Outdated packages found.' -ForegroundColor Red; exit 1 } else { Write-Host 'No outdated packages found.' -ForegroundColor Green }"
 
 if %ERRORLEVEL% neq 0 (
     exit /b %ERRORLEVEL%
