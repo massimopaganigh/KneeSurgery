@@ -53,5 +53,5 @@ jobs:
     - name: Upload artifact KneeSurgery_net9.0
       uses: actions/upload-artifact@v4
       with:
-        name: KneeSurgery_9.0
+        name: KneeSurgery_net9.0
         path: out/KneeSurgery_net9.0
