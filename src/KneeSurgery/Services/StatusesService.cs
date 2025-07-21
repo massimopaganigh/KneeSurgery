@@ -1,10 +1,13 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class StatusesService(Statuses statuses) : IStatusesService
+    public class StatusesService : IStatusesService
     {
+        private readonly Statuses _statuses;
+
+        public StatusesService(Statuses statuses) => _statuses = statuses;
+
         private bool _isMonitoring = false;
         private readonly System.Timers.Timer _robloxMonitorTimer = new(Constants.RobloxMonitorTimerPollingInterval);
-        private readonly Statuses _statuses = statuses;
 
         private void OnMonitorTimerElapsed(object? sender, ElapsedEventArgs e)
         {

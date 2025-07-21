@@ -1,8 +1,10 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class RobloxService(HttpClient httpClient) : IRobloxService
+    public class RobloxService : IRobloxService
     {
-        private readonly HttpClient _httpClient = httpClient;
+        private readonly HttpClient _httpClient;
+
+        public RobloxService(HttpClient httpClient) => _httpClient = httpClient;
 
         public async Task<string> GetVersionAsync()
         {
@@ -37,7 +39,7 @@
             try
             {
                 Process[] roblox = Process.GetProcessesByName(Constants.RobloxPlayerBeta);
-                List<string> killedRoblox = [];
+                List<string> killedRoblox = new();
                 int totalKilled = 0;
 
                 if (roblox.Length > 0)
