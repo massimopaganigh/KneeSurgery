@@ -1,9 +1,15 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class InjectionService(Directories directories, Statuses statuses) : IInjectionService
+    public class InjectionService : IInjectionService
     {
-        private readonly Directories _directories = directories;
-        private readonly Statuses _statuses = statuses;
+        private readonly Directories _directories;
+        private readonly Statuses _statuses;
+
+        public InjectionService(Directories directories, Statuses statuses)
+        {
+            _directories = directories;
+            _statuses = statuses;
+        }
 
         public (bool, string) Inject()
         {

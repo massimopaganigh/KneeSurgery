@@ -1,8 +1,10 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class BootstrapService(Directories directories) : IBootstrapService
+    public class BootstrapService : IBootstrapService
     {
-        private readonly Directories _directories = directories;
+        private readonly Directories _directories;
+
+        public BootstrapService(Directories directories) => _directories = directories;
 
         public async Task<(bool, string)> ExtractAsync()
         {
@@ -22,7 +24,7 @@
 
                 Log.Debug("[{0}] Starting file extraction from embedded resource: {1}.", nameof(ExtractAsync), resource);
 
-                List<string> extractedFiles = [];
+                List<string> extractedFiles = new();
                 using ZipArchive zipArchive = new(resourceStream, ZipArchiveMode.Read);
 
                 foreach (ZipArchiveEntry entry in zipArchive.Entries)

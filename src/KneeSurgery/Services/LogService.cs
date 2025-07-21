@@ -1,8 +1,10 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class LogService(Directories directories) : ILogService
+    public class LogService : ILogService
     {
-        private readonly Directories _directories = directories;
+        private readonly Directories _directories;
+
+        public LogService(Directories directories) => _directories = directories;
 
         public async Task StartLoggingAsync()
         {

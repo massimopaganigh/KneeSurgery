@@ -1,8 +1,10 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class KSFunctionsService(KSFunctions kSFunctions) : IKSFunctionsService
+    public class KSFunctionsService : IKSFunctionsService
     {
-        private readonly KSFunctions _ksFunctions = kSFunctions;
+        private readonly KSFunctions _ksFunctions;
+
+        public KSFunctionsService(KSFunctions kSFunctions) => _ksFunctions = kSFunctions;
 
         public string ProcessKSFunctions(string script)
         {
