@@ -1,9 +1,15 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class SirHurtService(Directories directories, HttpClient httpClient) : ISirHurtService
+    public class SirHurtService : ISirHurtService
     {
-        private readonly Directories _directories = directories;
-        private readonly HttpClient _httpClient = httpClient;
+        private readonly Directories _directories;
+        private readonly HttpClient _httpClient;
+
+        public SirHurtService(Directories directories, HttpClient httpClient)
+        {
+            _directories = directories;
+            _httpClient = httpClient;
+        }
 
         public async Task<string> GetVersionAsync()
         {
@@ -42,8 +48,8 @@
                 string sirHuiDirectory = Path.Combine(_directories.SirHurtDirectory, Constants.SirHui);
                 string sirHurtADat = Path.Combine(sirHuiDirectory, Constants.SirHurtADat);
                 string sirHurtPDat = Path.Combine(sirHuiDirectory, Constants.SirHurtPDat);
-                List<string> deletedFiles = [];
-                List<string> notFoundFiles = [];
+                List<string> deletedFiles = new();
+                List<string> notFoundFiles = new();
 
                 if (File.Exists(sirHurtADat))
                 {

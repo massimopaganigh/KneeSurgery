@@ -1,10 +1,17 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class DebugLogService(DebugLog debugLog, Directories directories) : IDebugLogService
+    public class DebugLogService : IDebugLogService
     {
-        private readonly DebugLog _debugLog = debugLog;
+        private readonly DebugLog _debugLog;
+        private readonly Directories _directories;
+
+        public DebugLogService(DebugLog debugLog, Directories directories)
+        {
+            _debugLog = debugLog;
+            _directories = directories;
+        }
+
         private readonly System.Timers.Timer _debugLogMonitorTimer = new(Constants.DebugLogMonitorTimerPollingInterval);
-        private readonly Directories _directories = directories;
         private bool _isMonitoring = false;
 
         private void OnMonitorTimerElapsed(object? sender, ElapsedEventArgs e)

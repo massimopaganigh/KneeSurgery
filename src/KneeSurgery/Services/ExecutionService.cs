@@ -1,10 +1,17 @@
 ﻿namespace KneeSurgery.Services
 {
-    public class ExecutionService(Directories directories, IKSFunctionsService kSFunctionsService, Statuses statuses) : IExecutionService
+    public class ExecutionService : IExecutionService
     {
-        private readonly Directories _directories = directories;
-        private readonly IKSFunctionsService _ksFunctionsService = kSFunctionsService;
-        private readonly Statuses _statuses = statuses;
+        private readonly Directories _directories;
+        private readonly IKSFunctionsService _ksFunctionsService;
+        private readonly Statuses _statuses;
+
+        public ExecutionService(Directories directories, IKSFunctionsService kSFunctionsService, Statuses statuses)
+        {
+            _directories = directories;
+            _ksFunctionsService = kSFunctionsService;
+            _statuses = statuses;
+        }
 
         public async Task<(bool, string)> ExecuteAsync(string script)
         {
