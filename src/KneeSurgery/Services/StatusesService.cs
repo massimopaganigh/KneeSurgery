@@ -77,7 +77,7 @@
             {
                 if (!_isMonitoring)
                 {
-                    Log.Debug("[{0}] Roblox process monitoring is not active.", nameof(StartMonitoring));
+                    Log.Debug("[{0}] Roblox process monitoring is not active.", nameof(StopMonitoring));
 
                     return;
                 }
@@ -86,7 +86,7 @@
                 _robloxMonitorTimer.Elapsed -= OnMonitorTimerElapsed;
                 _isMonitoring = false;
 
-                Log.Debug("[{0}] Roblox process monitoring stopped.", nameof(StartMonitoring));
+                Log.Debug("[{0}] Roblox process monitoring stopped.", nameof(StopMonitoring));
             }
             catch (Exception ex)
             {

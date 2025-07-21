@@ -68,18 +68,19 @@
                     UseShellExecute = true
                 };
 
-                using Process notepad = new()
+                Process notepad = new()
                 {
                     StartInfo = notepadStartInfo
                 };
 
-                notepad.Start();
-
-                if (notepad == null)
+                bool started = notepad.Start();
+                
+                if (!started)
                 {
                     string result = $"[{nameof(Open)}] Failed to start notepad process to open debug log.";
 
                     Log.Debug(result);
+                    notepad.Dispose();
 
                     return (false, result);
                 }
@@ -120,18 +121,19 @@
                     UseShellExecute = true
                 };
 
-                using Process explorer = new()
+                Process explorer = new()
                 {
                     StartInfo = explorerStartInfo
                 };
 
-                explorer.Start();
+                bool started = explorer.Start();
 
-                if (explorer == null)
+                if (!started)
                 {
                     string result = $"[{nameof(OpenDirectory)}] Failed to start explorer process to open debug log directory.";
 
                     Log.Debug(result);
+                    explorer.Dispose();
 
                     return (false, result);
                 }
@@ -166,7 +168,26 @@
                 _debugLogMonitorTimer.Enabled = true;
                 _isMonitoring = true;
 
-                OnMonitorTimerElapsed(null, null!);
+                // Initial load of debug log content
+                try
+                {
+                    string sirHDebugLogDat = Path.Combine(_directories.SirHurtDirectory, Constants.SirHui, Constants.SirHDebugLogDat);
+
+                    if (File.Exists(sirHDebugLogDat))
+                    {
+                        string content = File.ReadAllText(sirHDebugLogDat);
+                        _debugLog.Content = content;
+                        Log.Debug("[{0}] Initial debug log content loaded successfully. Content length: {1} characters.", nameof(StartMonitoring), content.Length);
+                    }
+                    else
+                    {
+                        Log.Debug("[{0}] Debug log file not found at path: {1}.", nameof(StartMonitoring), sirHDebugLogDat);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "[{0}] Failed to load initial debug log content", nameof(StartMonitoring));
+                }
 
                 Log.Debug("[{0}] Debug log monitoring started. Checking every 5 seconds.", nameof(StartMonitoring));
             }

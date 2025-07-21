@@ -3,7 +3,7 @@ global using KneeSurgery.Interfaces;
 global using KneeSurgery.Models;
 global using Serilog;
 global using Serilog.Configuration;
-//global using Serilog.Core;
+global using Serilog.Events;
 global using System.Diagnostics;
 global using System.IO.Compression;
 global using System.Reflection;
