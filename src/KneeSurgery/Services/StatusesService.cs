@@ -59,6 +59,7 @@
                 }
 
                 _robloxMonitorTimer.Elapsed += OnMonitorTimerElapsed;
+
                 _robloxMonitorTimer.AutoReset = true;
                 _robloxMonitorTimer.Enabled = true;
                 _isMonitoring = true;
@@ -83,7 +84,9 @@
                 }
 
                 _robloxMonitorTimer.Enabled = false;
+
                 _robloxMonitorTimer.Elapsed -= OnMonitorTimerElapsed;
+
                 _isMonitoring = false;
 
                 Log.Debug("[{0}] Roblox process monitoring stopped.", nameof(StopMonitoring));

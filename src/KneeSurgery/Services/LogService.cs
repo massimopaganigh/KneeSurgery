@@ -18,6 +18,7 @@
             catch (Exception ex)
             {
                 Console.WriteLine($"[{nameof(StartLoggingAsync)}] Exception: {ex}.");
+
                 await StopLoggingAsync();
             }
         }

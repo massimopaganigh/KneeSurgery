@@ -74,12 +74,13 @@
                 };
 
                 bool started = notepad.Start();
-                
+
                 if (!started)
                 {
                     string result = $"[{nameof(Open)}] Failed to start notepad process to open debug log.";
 
                     Log.Debug(result);
+
                     notepad.Dispose();
 
                     return (false, result);
@@ -133,6 +134,7 @@
                     string result = $"[{nameof(OpenDirectory)}] Failed to start explorer process to open debug log directory.";
 
                     Log.Debug(result);
+
                     explorer.Dispose();
 
                     return (false, result);
@@ -164,11 +166,11 @@
                 }
 
                 _debugLogMonitorTimer.Elapsed += OnMonitorTimerElapsed;
+                
                 _debugLogMonitorTimer.AutoReset = true;
                 _debugLogMonitorTimer.Enabled = true;
                 _isMonitoring = true;
 
-                // Initial load of debug log content
                 try
                 {
                     string sirHDebugLogDat = Path.Combine(_directories.SirHurtDirectory, Constants.SirHui, Constants.SirHDebugLogDat);
@@ -176,13 +178,13 @@
                     if (File.Exists(sirHDebugLogDat))
                     {
                         string content = File.ReadAllText(sirHDebugLogDat);
+
                         _debugLog.Content = content;
+
                         Log.Debug("[{0}] Initial debug log content loaded successfully. Content length: {1} characters.", nameof(StartMonitoring), content.Length);
                     }
                     else
-                    {
                         Log.Debug("[{0}] Debug log file not found at path: {1}.", nameof(StartMonitoring), sirHDebugLogDat);
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -209,7 +211,9 @@
                 }
 
                 _debugLogMonitorTimer.Enabled = false;
+
                 _debugLogMonitorTimer.Elapsed -= OnMonitorTimerElapsed;
+
                 _isMonitoring = false;
 
                 Log.Debug("[{0}] Debug log monitoring stopped.", nameof(StopMonitoring));

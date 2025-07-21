@@ -47,7 +47,6 @@
                     Log.Debug("[{0}] Found {1} active Roblox processes.", nameof(Kill), roblox.Length);
 
                     foreach (Process process in roblox)
-                    {
                         try
                         {
                             string processInfo = $"{process.ProcessName} (PID: {process.Id})";
@@ -70,7 +69,6 @@
                         {
                             process.Dispose();
                         }
-                    }
                 }
 
                 string result = totalKilled > 0 ? $"Successfully terminated {totalKilled} active Roblox processes: {string.Join(", ", killedRoblox)}" : "No active Roblox processes found running.";
