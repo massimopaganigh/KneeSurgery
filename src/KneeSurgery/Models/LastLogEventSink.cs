@@ -1,8 +1,9 @@
-﻿using Serilog.Events;
+﻿using Serilog.Core;
+using Serilog.Events;
 
 namespace KneeSurgery.Models
 {
-    public class LastLogEventSink : Serilog.Core.ILogEventSink
+    public class LastLogEventSink : ILogEventSink
     {
         public void Emit(LogEvent logEvent)
         {
