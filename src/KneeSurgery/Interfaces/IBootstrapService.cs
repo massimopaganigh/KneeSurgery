@@ -21,6 +21,7 @@ namespace KneeSurgery.Interfaces
         /// - bool: true if extraction succeeded, false if an error occurred
         /// - string: result message or error message of the extraction operation
         /// </returns>
+        [Obsolete("Sybau 🥀")]
         public Task<(bool, string)> ExtractAsync();
     }
 }

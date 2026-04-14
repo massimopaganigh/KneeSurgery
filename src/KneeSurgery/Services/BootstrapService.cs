@@ -6,6 +6,7 @@
 
         public BootstrapService(Directories directories) => _directories = directories;
 
+        [Obsolete("Sybau 🥀")]
         public async Task<(bool, string)> ExtractAsync()
         {
             try

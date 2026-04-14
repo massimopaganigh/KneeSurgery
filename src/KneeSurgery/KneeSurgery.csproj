@@ -7,20 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Assets\Images\**" />
-    <EmbeddedResource Remove="Assets\Images\**" />
-    <None Remove="Assets\Images\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Assets\Zips\SirHurt.zip" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\Zips\SirHurt.zip" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Serilog" Version="4.3.1" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
