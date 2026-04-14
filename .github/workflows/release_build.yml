@@ -43,6 +43,12 @@ jobs:
         name: KneeSurgery_net6.0
         path: out/KneeSurgery_net6.0
 
+    - name: Upload artifact KneeSurgery_net7.0
+      uses: actions/upload-artifact@v4
+      with:
+        name: KneeSurgery_net7.0
+        path: out/KneeSurgery_net7.0
+
     - name: Upload artifact KneeSurgery_net8.0
       uses: actions/upload-artifact@v4
       with:
@@ -54,6 +60,12 @@ jobs:
       with:
         name: KneeSurgery_net9.0
         path: out/KneeSurgery_net9.0
+
+    - name: Upload artifact KneeSurgery_net10.0
+      uses: actions/upload-artifact@v4
+      with:
+        name: KneeSurgery_net10.0
+        path: out/KneeSurgery_net10.0
 
     - name: GitHub Release
       uses: softprops/action-gh-release@v2

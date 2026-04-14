@@ -50,7 +50,7 @@ if %ERRORLEVEL% neq 0 (
 @REM     exit /b %ERRORLEVEL%
 @REM )
 
-set "frameworks=net6.0 net8.0 net9.0"
+set "frameworks=net6.0 net7.0 net8.0 net9.0 net10.0"
 
 for %%f in (%frameworks%) do (
     set "knee_surgery_publish_dir=%output_dir%\KneeSurgery_%%f"
